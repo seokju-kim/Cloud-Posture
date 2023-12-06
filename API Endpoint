@@ -1,0 +1,15 @@
+API Endpoints
+Endpoint
+POST /custom-rules/ - Create a new custom rule
+PUT /custom-rules/{id} - Update custom rule configuration
+GET /custom-rules/ - List custom rules
+GET /custom-rules/{id} - Get specified rule
+DELETE /custom-rules/{id} - Permanently delete custom rule. Note: This is an immediate action. It is recommended to disable any custom rules for one Conformity Bot cycle across accounts prior to deleting.
+POST /custom-rules/run - Executes custom rule
+Executing custom rule ‘run’ endpoint with parameters
+
+POST /custom-rules/run?accountId={accountId}&id={ruleId} - Posting to this route with the rule ID will execute this rule against the account provided and return the result(s) as part of the response.
+
+POST /custom-rules/run?accountId={accountId} - Posting to this route with a rule config as part of the request body will execute this rule configuration and return the results(s) as part of the response.
+POST /custom-rules/run - Posting to this route with a rule configuration and resource data as part of the request body will execute this rule configuration against provided resource data and return the results(s) as part of the response.
+POST /custom-rules/run?accountId={accountId}&resourceData=true - Posting to this route with specific resource id in the rule configuration request body will return the resource data along with the check result.
