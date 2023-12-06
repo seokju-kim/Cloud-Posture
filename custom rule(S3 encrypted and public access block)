@@ -1,0 +1,62 @@
+{
+  "configuration": {
+    "name": "S3 encrypted and public access block - with safelist for 'test'",
+    "description": "Check S3 has encryption AND public access block, but safelist 'test' buckets",
+    "service": "S3",
+    "resourceType": "s3-bucket",
+    "severity": "HIGH",
+    "enabled": true,
+    "provider": "aws",
+    "categories": [
+      "security"
+    ],
+    "remediationNotes": "To remediate, follow these steps:\n1. Do as you wish \n2. Step two\n",
+    "attributes": [
+      {
+        "name": "bucketEncryption",
+        "path": "data.Encryption",
+        "required": true
+      },
+      {
+        "name": "publicAccessBlockConfiguration",
+        "path": "data.PublicAccessBlockConfiguration",
+        "required": true
+      },
+      {
+        "name": "safeList",
+        "path": "data.resourceId",
+        "required": true
+      }
+    ],
+    "rules": [
+      {
+        "conditions": {
+          "any": [
+            {
+              "fact": "safeList",
+              "operator": "pattern",
+              "value": ".*test.*"
+            },
+            {
+              "all": [
+                {
+                  "fact": "bucketEncryption",
+                  "operator": "notEqual",
+                  "value": null
+                },
+                {
+                  "fact": "publicAccessBlockConfiguration",
+                  "operator": "notEqual",
+                  "value": null
+                }
+              ]
+            }
+          ]
+        },
+        "event": {
+          "type": "Bucket has encryption enabled"
+        }
+      }
+    ]
+  }
+}
