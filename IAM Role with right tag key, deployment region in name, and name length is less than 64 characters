@@ -1,0 +1,72 @@
+{
+  "name": "IAM Role with right tag key, region and name length",
+  "description": "We want to make sure that IAM roles adhere to serverless format for multi-region deployment. Role should be tagged with Key 'Service' or 'service', role name should be less than 64, and contain the region in the name",
+  "remediationNotes": "If this is a failure, please contact the service owner and follow these steps:\n1. Step one \n2. Step two\n",
+  "service": "IAM",
+  "resourceType": "iam-role",
+  "attributes": [
+    {
+      "name": "roleName",
+      "path": "data.RoleName",
+      "required": true
+    },
+    {
+      "name": "serviceTag",
+      "path": "data.Tags",
+      "required": true
+    }
+  ],
+  "severity": "HIGH",
+  "provider": "aws",
+  "categories": [
+    "security"
+  ],
+  "enabled": true,
+  "rules": [
+    {
+      "conditions": {
+        "any": [
+          {
+            "path": "$.length",
+            "fact": "serviceTag",
+            "value": 0,
+            "operator": "equal"
+          },
+          {
+            "all": [
+              {
+                "path": "$.[*].Key",
+                "fact": "serviceTag",
+                "value": "Service",
+                "operator": "doesNotContain"
+              },
+              {
+                "path": "$.[*].Key",
+                "fact": "serviceTag",
+                "value": "service",
+                "operator": "doesNotContain"
+              }
+            ]
+          },
+          {
+            "all": [
+              {
+                "fact": "roleName",
+                "operator": "pattern",
+                "value": "^([a-zA-Z0-9_-]){1,64}$"
+              },
+              {
+                "fact": "roleName",
+                "operator": "pattern",
+                "value": "(us-west-2|us-east-1|ap-southeast-2|eu-west-1)"
+              }
+            ]
+          }
+        ]
+      },
+      "event": {
+        "type": "Is tagged service, name not longer than 64 chars and has region in name"
+      }
+    }
+  ]
+}
