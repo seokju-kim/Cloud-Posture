@@ -1,0 +1,33 @@
+{
+  "data": {
+    "name": "My Custom Compliance Standard",
+    "version": "v1",
+    "description": "This is a custom compliance standard for my organisation",
+    "isEnabled": true,
+    "type": "DRAFT",
+    "controls": [
+      {
+        "aid": "0.1a",
+        "awsRules": [
+          "RTM-001",
+          "RTM-002"
+        ],
+        "azureRules": [
+          "ActiveDirectory-001",
+          "ActiveDirectory-002"
+        ],
+        "gcpRules": [
+          "BigQuery-001",
+          "BigQuery-002"
+        ],
+        "headings": {
+          "level1": "Access Control",
+          "level2": "Business Requirement for Access Control",
+          "level3": "Some level 3 heading"
+        },
+        "title": "Access Control Policy",
+        "externalUrl": "https://moreinfo.example.com"
+      }
+    ]
+  }
+}

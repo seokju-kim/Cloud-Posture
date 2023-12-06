@@ -1,0 +1,20 @@
+{
+    "name": "My Custom Compliance Standard",
+    "isEnabled": true,
+    "version": "v3",
+    "type": "DRAFT",
+    "description": "a top level description describing this mapping",
+    "complianceRuleMapping": [
+        {
+            "aid": "0.1a",
+            "title": "Access Control Policy",
+            "headings": {
+                "level1": "Access Control",
+                "level2": "Business Requirement for Access Control",
+                "level3": "Some level 3 heading"
+            },
+            "moreInfo": "a link to more info about this control",
+            "awsRules": "AccessAnalyzer-001,CC-002,CWL-010,IAM-004,IAM-016,IAM-028,IAM-029,IAM-032,IAM-035,IAM-036,IAM-037,IAM-045,IAM-049,IAM-050,IAM-052,IAM-053,IAM-057,IAM-061,IAM-065,IAM-066,IAM-068,IAM-069,Neptune-005,RDS-030,RTM-001,RTM-002,RTM-003,RTM-004,TrustedAdvisor-003",
+            "azureRules": "ActiveDirectory-001,ActiveDirectory-002,ActiveDirectory-003,ActiveDirectory-008,ActiveDirectory-009,ActiveDirectory-010,ActiveDirectory-011,ActiveDirectory-012,ActiveDirectory-013,ActiveDirectory-014,ActiveDirectory-015,ActiveDirectory-017,ActiveDirectory-018,ActiveDirectory-019,ActiveDirectory-020,ActiveDirectory-023,Advisor-001,AppService-009,SecurityCenter-022,SecurityCenter-024,Sql-004,StorageAccounts-015,Subscriptions-002",
+            "gcpRules": "BigQuery-001,BigQuery-002,CloudAPI-001,CloudAPI-002,CloudAPI-003,CloudAPI-004,CloudDNS-001,CloudDNS-002,CloudDNS-003,CloudIAM-001,CloudIAM-002,CloudIAM-003,CloudIAM-004,CloudIAM-005,CloudIAM-006,CloudIAM-007,CloudIAM-008,CloudIAM-009,CloudIAM-010,CloudIAM-011,CloudKMS-001,CloudKMS-002,CloudLoadBalancing-001,CloudLoadBalancing-002,CloudLogging-001,CloudLogging-002,CloudLogging-003,CloudLogging-004,CloudLogging-005,CloudLogging-006,CloudLogging-007"
+        }

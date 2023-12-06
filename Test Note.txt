@@ -1,0 +1,17 @@
+aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 967737058948.dkr.ecr.ap-northeast-2.amazonaws.com
+
+docker push 967737058948.dkr.ecr.ap-northeast-2.amazonaws.com/hello-repository
+
+aws eks update-kubeconfig --region ap-northeast-2 --name V1-EKS-Test-202311
+
+
+https://portal.sg.xdr.trendmicro.com/index.html#/api/compliance-standards/custom
+
+
+
+* C1 Conformity-API:
+tmc12YSz6F5DviurI2P6QaUmBZESJYj:cBRe727JJR1yoC7pWsSRY5UQt14EqQ3dj87JLcxVYQDuRTjDm6nxRB5gSGcqNbXs5
+
+* Conformity API URL:
+https://conformity.us-1.cloudone.trendmicro.com/api/compliance-standards/custom
+
