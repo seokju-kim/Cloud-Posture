@@ -1,0 +1,88 @@
+Definitions
+attributes: collection of user defined attribute names and the associated resource value that will be used as part of the rule logic/evaluation
+rules*: a set of rules for the custom rule
+conditions*: the conditions object for a rule set
+facts*: the related attribute name in which the value can be found
+events: the name or description of the rule set.
+General parameters
+name: Name or title of custom rule
+description: Optional description value
+severity: Risk/severity level of the custom rule, can be one of the following: LOW, MEDIUM, HIGH, VERY HIGH.
+categories: An array of category best practice pillar strings, can be any of the following: security, reliability, performance-efficiency, cost-optimisation, operation-excellence.
+remediationNotes: Optional text description of notes or steps relevant to remediation.
+enabled: Boolean indicating status of a rule, disabled rules (i.e., enabled set to false) will not be run by Conformity Bot or Real-Time Threat Monitoring (RTM).
+provider: Cloud provider (e.g., aws, azure, gcp). For a complete list, please refer to Conformity Providers Endpoint
+Resource parameters
+service: The cloud provider service name (e.g., S3). For a complete list of supported services, please refer to Conformity Services Endpoint.
+resourceType: The type of resource this custom rule applies to (e.g., s3-bucket). For a complete list, please refer to Conformity Resource Types Endpoint.
+attributes: (array of objects)
+name: user defined to the value of the result of the path query, this value is used as the fact input to the rule condition
+path: jsonpath syntax to resource value
+required: Boolean that determines if this data value is required for the rule to run. If required is set to true and the result of the attribute path is undefined, the rule will not run as it does not have the necessary data to provide an accurate result. In cases where data being undefined can be expected, setting required: false, will allow the rule to run regardless.
+Rule parameters
+rules: (array) a custom rule can have multiple rule sets
+conditions (object): Each condition must begin with all or any at its root.
+any/all (array): these conditions can be nested (see example below)
+fact: attribute value, must have a matching attribute name
+operator:
+parameters:
+String (equal, notEqual, pattern) * Note: pattern is a custom operator which can match a regular expression (regex)
+Number (equal, notEqual, lessThan, lessThanInclusive, greaterThan, greaterThanInclusive)
+Array (in, notIn, contains, doesNotContain)
+value: expected value of attribute, If the result is truthy, the condition passes.
+path: jsonpath syntax for nested values
+event:
+parameter:
+type: this is the value that is returned for the rule set required
+Operators
+The operator in each rule condition compares the value of the fact to what is set in the value property. If the result is truthy, the condition passes.
+
+Regex:
+
+pattern: fact must pass regex pattern set in value
+String and Numbers:
+
+equal: fact must equal value
+notEqual: fact must not equal value
+these operators use strict equality (===) and inequality (!==)
+
+Numeric:
+
+lessThan: fact must be less than value
+lessThanInclusive: fact must be less than or equal to value
+greaterThan: fact must be greater than value
+greaterThanInclusive: fact must be greater than or equal to value
+Array:
+
+in: fact must be included in value (an array)
+notIn: fact must not be included in value (an array)
+contains: fact (an array) must include value
+doesNotContain: fact (an array) must not include value
+Null or Undefined:
+
+isNullOrUndefined: fact must be null or undefined if value is true
+Date:
+
+dateComparison: a operator to compare a date fact
+The value should be an object includes days and operator properties
+days: the number of days to compare the fact date to
+operator: the operator to use for the comparison. Can be one of the following: within, olderThan
+Example:
+{
+  "fact": "CreationDate",
+  "operator": "dateComparison",
+  "value": 
+    {
+      "days": 30,
+      "operator": "within"
+    }
+}
+Example Configurations
+To see custom rule sample configurations, please refer to example library here.
+
+Check Results
+A rule must pass all conditions for it to be considered a successful check and return a SUCCESS result. If any rule conditions fail, the rule will return a FAILURE result including any failing rule events as part of the check metadata.
+
+The check result message does not require any configuration. The message is automatically formatted based on the settings and whether the rule conditions pass or fail.
+
+Format: {resourceType} {resourceName} passed/failed {ruleEvent} and {Number(ruleConditions - 1)} more rule conditions.
